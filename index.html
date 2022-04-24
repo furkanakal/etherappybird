@@ -5,7 +5,7 @@
     <title>Original Flappy Bird -JavaScript</title>
     <link href="https://fonts.googleapis.com/css?family=Teko:700" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-
+    <script src="./utils/staking.js"></script>
     <style>        
         canvas{
             border: 1px solid #000;
@@ -19,6 +19,9 @@
       <button id='loginButton' onclick="" class="mx-auto rounded-md p-2 bg-purple-500 text-white">
         Login with MetaMask
       </button>
+      <button id='' onclick="" class="mx-auto rounded-md p-2 bg-purple-500 text-white">
+        Stake and join the game
+      </button>
       <p id='userWallet' class='text-lg text-gray-600 my-2'></p>
     </div>
   
@@ -26,6 +29,8 @@
     <script>
         window.userWalletAddress = null
         const loginButton = document.getElementById('loginButton')
+        const joinButton = document.getElementById('joinButton')
+
         const userWallet = document.getElementById('userWallet')
     
         function toggleButton() {
@@ -37,6 +42,8 @@
           }
     
           loginButton.addEventListener('click', loginWithMetaMask)
+          joinButton.addEventListener('click', joinTheGame)
+     
         }
     
         async function loginWithMetaMask() {
@@ -55,6 +62,11 @@
           setTimeout(() => {
             loginButton.addEventListener('click', signOutOfMetaMask)
           }, 200)
+        }
+
+        async function joinTheGame(){
+          approve();
+          stake();
         }
     
         function signOutOfMetaMask() {
